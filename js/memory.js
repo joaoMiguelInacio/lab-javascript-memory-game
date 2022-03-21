@@ -37,7 +37,7 @@ class MemoryGame {
 
   checkIfFinished() {
     if(this.pairsGuessed === (this.cards.length/2)){
-      setTimeout(()=>{alert(`Well done ${playerName}! You managed to clear the game in ${pairsClicked*2} clicks, that is the best score in this universe!`)}, 1000);
+      setTimeout(()=>{alert(`Well done ${playerName}! You managed to clear the game in ${this.pairsClicked*2} clicks, that is the best score in this universe!`)}, 1000);
             document.querySelectorAll('.card').forEach((card) => {
         setTimeout(()=>{
           this.pairsGuessed = 0;
