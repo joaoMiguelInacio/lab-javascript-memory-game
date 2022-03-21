@@ -28,12 +28,6 @@ const cards = [
 const memoryGame = new MemoryGame(cards);
 
 window.addEventListener('load', (event) => {
-  
-  let playerName = prompt("What's your name?");
-  let playerNameElement1 = document.getElementById("playerName1");
-  let playerNameElement2 = document.getElementById("playerName2");
-  playerNameElement1.innerHTML = playerName;
-  playerNameElement2.innerHTML = playerName;
 
   let html = '';
   memoryGame.shuffleCards(memoryGame.cards);
@@ -73,3 +67,12 @@ window.addEventListener('load', (event) => {
 // issue 1:
 // Uncaught TypeErrror thrown if third card is clicked before the other 2 (not equal) turn back
 // Can affect gameplay if player clicks on multiple images during those 1.5 seconds
+
+// issue 2:
+// HTML document loads correctly if accessed through VS Code only
+// Doesn't load the javascript files nor css if opened manually/through the desktop
+
+// ??issue 3:
+/* not consistently but it appears that, sometimes,
+ when opening the page for the first time it takes longer to load 
+ or requires one to move to a diferent tab or app to fully load */
