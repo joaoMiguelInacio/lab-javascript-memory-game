@@ -4,9 +4,10 @@ class MemoryGame {
     this.pickedCards = [];
     this.pairsClicked = 0;
     this.pairsGuessed = 0;
+    this.pairedCards = [];
   }
 
-  shuffleCards() {
+  shuffleCards() { 
     if (!this.cards){
       return undefined;
     }
@@ -28,8 +29,22 @@ class MemoryGame {
     return false;
   }
 
+  emptyPickedCardsArray (element1, element2){
+    element1.classList.toggle("turned");
+    element2.classList.toggle("turned");
+    this.pickedCards = [];
+  }
+
   checkIfFinished() {
     if(this.pairsGuessed === (this.cards.length/2)){
+      setTimeout(()=>{alert("Well done! Let's try again!")}, 1000);
+            document.querySelectorAll('.card').forEach((card) => {
+        setTimeout(()=>{
+          this.pairsGuessed = 0;
+          this.pairsClicked = 0;
+          card.classList.toggle("turned");
+          }, 5000);
+      });
       return true;
     }
     return false;

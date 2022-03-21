@@ -28,7 +28,15 @@ const cards = [
 const memoryGame = new MemoryGame(cards);
 
 window.addEventListener('load', (event) => {
+  
+  let playerName = prompt("What's your name?");
+  let playerNameElement1 = document.getElementById("playerName1");
+  let playerNameElement2 = document.getElementById("playerName2");
+  playerNameElement1.innerHTML = playerName;
+  playerNameElement2.innerHTML = playerName;
+
   let html = '';
+  memoryGame.shuffleCards(memoryGame.cards);
   memoryGame.cards.forEach((pic) => {
     html += `
       <div class="card" data-card-name="${pic.name}">
@@ -38,14 +46,30 @@ window.addEventListener('load', (event) => {
     `;
   });
 
-  // Add all the divs to the HTML
   document.querySelector('#memory-board').innerHTML = html;
-
-  // Bind the click event of each element to a function
+ 
   document.querySelectorAll('.card').forEach((card) => {
-    card.addEventListener('click', () => {
-      // TODO: write some code here
-      console.log(`Card clicked: ${card}`);
+    card.addEventListener('click', (event) => {
+        if (memoryGame.pickedCards.length < 2) {
+        card.classList.toggle("turned");
+        memoryGame.pickedCards.push(card);
+      } 
+      if (memoryGame.pickedCards.length === 2) {
+        if (memoryGame.checkIfPair(memoryGame.pickedCards[0].innerHTML, memoryGame.pickedCards[1].innerHTML)){
+          memoryGame.pickedCards = []
+        } else {
+          setTimeout(()=>{memoryGame.emptyPickedCardsArray(memoryGame.pickedCards[0], memoryGame.pickedCards[1])}, 1500);
+        }
+      }
+      let pairsClickedScore = document.getElementById("pairs-clicked");
+      pairsClickedScore.innerHTML = memoryGame.pairsClicked;
+      let pairsGuessedScore = document.getElementById("pairs-guessed");
+      pairsGuessedScore.innerHTML= memoryGame.pairsGuessed;
+      memoryGame.checkIfFinished();    
     });
   });
 });
+
+// issue 1:
+// Uncaught TypeErrror thrown if third card is clicked before the other 2 (not equal) turn back
+// Can affect gameplay if player clicks on multiple images during those 1.5 seconds
