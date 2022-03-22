@@ -50,7 +50,7 @@ window.addEventListener('load', (event) => {
       } 
       if (memoryGame.pickedCards.length === 2) {
         if (memoryGame.checkIfPair(memoryGame.pickedCards[0].innerHTML, memoryGame.pickedCards[1].innerHTML)){
-          memoryGame.pickedCards = []
+          memoryGame.pickedCards = [];
         } else {
           setTimeout(()=>{memoryGame.emptyPickedCardsArray(memoryGame.pickedCards[0], memoryGame.pickedCards[1])}, 1500);
         }
@@ -68,11 +68,7 @@ window.addEventListener('load', (event) => {
 // Uncaught TypeErrror thrown if third card is clicked before the other 2 (not equal) turn back
 // Can affect gameplay if player clicks on multiple images during those 1.5 seconds
 
-// issue 2:
-// HTML document loads correctly if accessed through VS Code only
-// Doesn't load the javascript files nor css if opened manually/through the desktop
-
-// ??issue 3:
-/* not consistently but it appears that, sometimes,
+// ??issue 2:
+/* it appears that, sometimes,
  when opening the page for the first time it takes longer to load 
  or requires one to move to a diferent tab or app to fully load */
