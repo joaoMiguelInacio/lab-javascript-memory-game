@@ -44,31 +44,28 @@ window.addEventListener('load', (event) => {
  
   document.querySelectorAll('.card').forEach((card) => {
     card.addEventListener('click', (event) => {
-        if (memoryGame.pickedCards.length < 2) {
+      if (memoryGame.pickedCards.length < 2) {
         card.classList.toggle("turned");
         memoryGame.pickedCards.push(card);
-      } 
-      if (memoryGame.pickedCards.length === 2) {
-        if (memoryGame.checkIfPair(memoryGame.pickedCards[0].innerHTML, memoryGame.pickedCards[1].innerHTML)){
-          memoryGame.pickedCards = [];
-        } else {
-          setTimeout(()=>{memoryGame.emptyPickedCardsArray(memoryGame.pickedCards[0], memoryGame.pickedCards[1])}, 1500);
+        if (memoryGame.pickedCards.length === 2) {
+          if (memoryGame.checkIfPair(memoryGame.pickedCards[0].innerHTML, memoryGame.pickedCards[1].innerHTML)){
+            memoryGame.pickedCards = [];
+          } else {
+            setTimeout(()=>{memoryGame.emptyPickedCardsArray(memoryGame.pickedCards[0], memoryGame.pickedCards[1])}, 1500);
+          }
         }
-      }
-      let pairsClickedScore = document.getElementById("pairs-clicked");
-      pairsClickedScore.innerHTML = memoryGame.pairsClicked;
-      let pairsGuessedScore = document.getElementById("pairs-guessed");
-      pairsGuessedScore.innerHTML= memoryGame.pairsGuessed;
-      memoryGame.checkIfFinished();    
+        let pairsClickedScore = document.getElementById("pairs-clicked");
+        pairsClickedScore.innerHTML = memoryGame.pairsClicked;
+        let pairsGuessedScore = document.getElementById("pairs-guessed");
+        pairsGuessedScore.innerHTML= memoryGame.pairsGuessed;
+        memoryGame.checkIfFinished();  
+      } 
     });
   });
 });
 
-// issue 1:
-// Uncaught TypeErrror thrown if third card is clicked before the other 2 (not equal) turn back
-// Can affect gameplay if player clicks on multiple images during those 1.5 seconds
 
-// ??issue 2:
+// ??issue 1:
 /* it appears that, sometimes,
  when opening the page for the first time it takes longer to load 
  or requires one to move to a diferent tab or app to fully load */
